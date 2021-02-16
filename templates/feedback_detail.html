@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+
+{% block content %}
+    <br>
+    <div class="container">
+        <div class="d-flex justify-content-center row">
+            <div class="justify-content-center row">
+                <div class="col-md-12">
+                    <h4>{{ feedback.title }}</h4>
+                </div>
+                <div class="ustify-content-center col-md-12">
+                    <p>{{ feedback.content }}</p>
+                </div>
+                <div class="col-md-12">
+                    <a class="btn btn-success" href="/feedbacks/{{ feedback.id }}/edit" role="button">Edit</a>
+                    <a class="btn btn-danger" href="/feedbacks/{{ feedback.id }}/delete" role="button">Delete</a>
+                    <a class="btn btn-light" href="/users/{{ username }}" role="button">Back</a>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

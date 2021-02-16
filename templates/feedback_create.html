@@ -1,0 +1,28 @@
+{% extends 'base.html'  %}
+
+{% block title %}
+    <h3>Register</h3>
+{% endblock %}
+{% block content %}
+    <form id="feedback_form" method="POST" action="/feedbacks/{{ username }}">
+        {{ form.hidden_tag() }}
+        <div class="form-group row justify-content-center">
+            {% for field in form if field.widget.input_type != 'hidden' %}
+                <div class="col-md-12 mt-4">
+                    {{ field.label(class_="col-sm-5") }}
+                    <div class="d-block">
+                        {{ field(class_="form-control") }}
+                    </div>
+                </div>
+                    {% for error in field.errors %}
+                        {{ error }}
+                    {% endfor %}
+            {% endfor %}
+        <input type="hidden" value="">
+        </div>
+        <div class="float-right">
+            <button class="btn btn-primary" type="submit">Create</button>
+            <a class="btn btn-light" href="/users/{{ username }}" methods="GET" role="button">Cancel</a>
+        </div>
+    </form>
+{% endblock %}

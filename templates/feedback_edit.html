@@ -1,0 +1,37 @@
+{% extends 'base.html'%}
+
+{% block content %}
+    <div class="container mt-4">
+        <form action="/feedbacks/{{ feedback.id }}/edit" method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group row justify-content-center">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <h5>Update your feedback:</h5>
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.title.label(class_="col-sm-2") }}
+                        <div class="col-sm-10">
+                            {{ form.title(class_="form-control") }}
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.content.label(class_="col-sm-2") }}
+                        <div class="col-sm-10">
+                            {{ form.content(class_="form-control") }}
+                        </div>
+                    </div>
+                </div>
+                {% for field in form if field.widget.input_type != 'hidden' %}
+                    {% for error in field.errors %}
+                        {{ error }}
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            <div class="float-right">
+                <button class="btn btn-primary" type="submit">Update</button>
+                <a class="btn btn-light" href="/users/{{ feedback.user.username }}" methods="GET" role="button">Back</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

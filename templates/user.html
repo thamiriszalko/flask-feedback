@@ -1,0 +1,55 @@
+{% extends 'base.html'  %}
+
+{% block title %}
+    <h3>Hello, {{ user.full_name }}!</h3>
+{% endblock %}
+{% block content %}
+        <form id="user_login_form" method="POST" action="/feedbacks/{{ user.username }}">
+            {{ form.hidden_tag() }}
+            <div class="form-group row justify-content-center">
+                <div class="col-md-12 mt-4">
+                    {{ form.first_name.label(class_="col-sm-5") }}
+                    <div class="d-block">
+                        <input class="form-control" name="first_name" value="{{ user.first_name }}" readonly>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-4">
+                    {{ form.last_name.label(class_="col-sm-5") }}
+                    <div class="d-block">
+                        <input class="form-control" name="last_name" value="{{ user.last_name }}" readonly>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-4">
+                    {{ form.username.label(class_="col-sm-5") }}
+                    <div class="d-block">
+                        <input class="form-control" name="username" value="{{ user.username }}" readonly>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-4">
+                    {{ form.email.label(class_="col-sm-5") }}
+                    <div class="d-block">
+                        <input class="form-control" name="email" value="{{ user.email }}" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <div>
+                    <h3>Feedbacks list</h3>
+                </div>
+                <div class="float-right">
+                    <button class="btn btn-primary" type="submit">Add feedback</button>
+                </div>
+                <ul class="list-group">
+                    {% if user.feedbacks %}
+                        {% for feedback in user.feedbacks %}
+                            <a href="/feedbacks/{{ feedback.id }}/detail">
+                                {{ feedback.title }}
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <h6>No feedbacks found.</h6>
+                    {% endif %}
+                </ul>
+            </div>
+        </form>
+{% endblock %}
